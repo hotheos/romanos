@@ -507,7 +507,59 @@ body {
   }
 }
 
-/* --- 16. TOOLTIPS GRIEGOS --- */
+/* --- 16. DIVISORES DE SECCIÓN --- */
+.divisor-seccion {
+  border-top: 1.5px solid var(--color-acento);
+  padding: 2.5rem 0 1.5rem;
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+}
+.divisor-seccion:first-of-type {
+  margin-top: 0;
+}
+.divisor-rango {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-acento);
+  margin-bottom: 0.4rem;
+}
+.divisor-titulo {
+  display: block;
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.divisor-descripcion {
+  display: block;
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-texto-sec);
+  line-height: 1.65;
+  max-width: 560px;
+  margin: 0 auto;
+}
+@media (max-width: 480px) {
+  .divisor-seccion {
+    padding: 2rem 0 1.25rem;
+    text-align: left;
+  }
+  .divisor-titulo {
+    font-size: 1.25rem;
+  }
+  .divisor-descripcion {
+    font-size: 0.92rem;
+  }
+}
+
+/* --- 17. TOOLTIPS GRIEGOS --- */
 .tooltip-griego {
   position: relative;
   cursor: help;
