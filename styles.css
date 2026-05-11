@@ -509,13 +509,15 @@ body {
 
 /* --- 16. DIVISORES DE SECCIÓN --- */
 .divisor-seccion {
-  border-top: 1.5px solid var(--color-acento);
-  padding: 2.5rem 0 1.5rem;
-  margin: 1rem 0 0.5rem;
+  border-top: none;
+  padding: 2rem 0 1.25rem;
+  margin: 0.5rem 0 0.25rem;
   text-align: center;
 }
 .divisor-seccion:first-of-type {
   margin-top: 0;
+  border-top: 1.5px solid var(--color-acento);
+  padding-top: 2.5rem;
 }
 .divisor-rango {
   display: block;
