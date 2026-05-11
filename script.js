@@ -139,7 +139,35 @@
   });
 
   // =============================================
-  // 4. TOOLTIPS GRIEGOS (CERRAR AL TOCAR FUERA)
+  // 4. CONTEXTO HISTÓRICO (TOGGLE INDEPENDIENTE)
+  // =============================================
+
+  var btnContexto = document.querySelector('.btn-contexto');
+  if (btnContexto) {
+    var panelContexto = document.getElementById(btnContexto.getAttribute('aria-controls'));
+    var iconoContexto = btnContexto.querySelector('.btn-contexto-icono');
+
+    btnContexto.addEventListener('click', function () {
+      var abierto = btnContexto.getAttribute('aria-expanded') === 'true';
+      if (abierto) {
+        panelContexto.classList.remove('abierto');
+        btnContexto.setAttribute('aria-expanded', 'false');
+      } else {
+        panelContexto.classList.add('abierto');
+        btnContexto.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    btnContexto.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btnContexto.click();
+      }
+    });
+  }
+
+  // =============================================
+  // 5. TOOLTIPS GRIEGOS (CERRAR AL TOCAR FUERA)
   // =============================================
 
   document.addEventListener('click', function (e) {
