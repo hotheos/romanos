@@ -138,4 +138,16 @@
     });
   });
 
+  // =============================================
+  // 4. TOOLTIPS GRIEGOS (CERRAR AL TOCAR FUERA)
+  // =============================================
+
+  document.addEventListener('click', function (e) {
+    // Si el clic fue fuera de un tooltip, quitar el foco del tooltip activo
+    if (!e.target.closest('.tooltip-griego')) {
+      var activo = document.querySelector('.tooltip-griego:focus');
+      if (activo) activo.blur();
+    }
+  });
+
 })();

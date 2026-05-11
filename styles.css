@@ -409,7 +409,87 @@ body {
   }
 }
 
-/* --- 15. MISC --- */
+/* --- 15. TOOLTIPS GRIEGOS --- */
+.tooltip-griego {
+  position: relative;
+  cursor: help;
+  border-bottom: 1.5px dotted var(--color-acento);
+  font-style: normal;
+}
+/* Contenedor del tooltip (oculto por defecto) */
+.tooltip-contenido {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 320px;
+  max-width: 90vw;
+  background: var(--color-fondo);
+  border: 1.5px solid var(--color-acento);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 4px 20px var(--color-sombra), 0 0 0 1px var(--color-borde);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  z-index: 100;
+  pointer-events: none;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--color-texto);
+}
+/* Flecha del tooltip */
+.tooltip-contenido::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  border: 7px solid transparent;
+  border-top-color: var(--color-acento);
+}
+/* Mostrar en hover y focus (para teclado y tap móvil) */
+.tooltip-griego:hover .tooltip-contenido,
+.tooltip-griego:focus .tooltip-contenido,
+.tooltip-griego:focus-within .tooltip-contenido {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+/* Palabra griega dentro del tooltip */
+.tooltip-palabra {
+  display: block;
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-acento);
+  margin-bottom: 0.35rem;
+}
+/* Definición dentro del tooltip */
+.tooltip-definicion {
+  display: block;
+  color: var(--color-texto);
+}
+
+/* En móvil: tooltip debajo de la palabra y más ancho */
+@media (max-width: 480px) {
+  .tooltip-contenido {
+    position: fixed;
+    bottom: auto;
+    top: auto;
+    left: 5vw;
+    right: 5vw;
+    transform: none;
+    width: 90vw;
+    bottom: 1rem;
+  }
+  .tooltip-contenido::after {
+    display: none;
+  }
+}
+
+/* --- 16. MISC --- */
 ::selection { background: var(--color-acento); color: #fff; }
 :focus:not(:focus-visible) { outline: none; }
 :focus-visible { outline: 2px solid var(--color-acento); outline-offset: 2px; }
