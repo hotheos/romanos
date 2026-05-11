@@ -358,8 +358,8 @@ body {
     padding: 1rem 0;
   }
   .versiculo {
-    font-size: 1.05rem;
-    line-height: 1.7;
+    font-size: 1.15rem;
+    line-height: 1.75;
   }
   .paralelos {
     margin-left: 0.25rem;
@@ -369,16 +369,16 @@ body {
     padding: 0.85rem 1rem;
   }
   .paralelo-texto {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
   .nota-exegetica {
     padding: 0.85rem 1rem;
   }
   .nota-exegetica p {
-    font-size: 0.84rem;
+    font-size: 0.92rem;
   }
   .nota-exegetica li {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
   .btn-tema {
     top: 1rem;
@@ -388,7 +388,7 @@ body {
   }
   .site-footer {
     padding: 1.5rem 1rem;
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 }
 
@@ -570,24 +570,75 @@ body {
   color: var(--color-texto);
 }
 
-/* En móvil: tooltip debajo de la palabra y más ancho */
+/* Backdrop oscuro para móvil (controlado por JS) */
+.tooltip-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 99;
+  -webkit-tap-highlight-color: transparent;
+}
+.tooltip-backdrop.visible {
+  display: block;
+}
+
+/* En móvil: bottom sheet con animación slide-up */
 @media (max-width: 480px) {
+  /* Desactivar hover/focus en móvil — se controla por JS */
+  .tooltip-griego:hover .tooltip-contenido,
+  .tooltip-griego:focus .tooltip-contenido,
+  .tooltip-griego:focus-within .tooltip-contenido {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
   .tooltip-contenido {
     position: fixed;
-    bottom: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
     top: auto;
-    left: 5vw;
-    right: 5vw;
-    transform: none;
-    width: 90vw;
-    bottom: 1rem;
+    width: 100%;
+    max-width: 100vw;
+    border-radius: 16px 16px 0 0;
+    border: none;
+    border-top: 2px solid var(--color-acento);
+    padding: 1.2rem 1.25rem 1.5rem;
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.2);
+    transform: translateY(100%);
+    transition: transform .3s ease, opacity .3s ease, visibility .3s ease;
+    z-index: 200;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  /* Barra de arrastre decorativa */
+  .tooltip-contenido::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    background: var(--color-borde);
+    border-radius: 2px;
+    margin: 0 auto 0.75rem;
   }
   .tooltip-contenido::after {
     display: none;
   }
+  /* Clase activa controlada por JS */
+  .tooltip-contenido.tooltip-activo {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .tooltip-palabra {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
-/* --- 16. MISC --- */
+/* --- 17. MISC --- */
 ::selection { background: var(--color-acento); color: #fff; }
 :focus:not(:focus-visible) { outline: none; }
 :focus-visible { outline: 2px solid var(--color-acento); outline-offset: 2px; }

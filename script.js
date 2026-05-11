@@ -167,12 +167,69 @@
   }
 
   // =============================================
-  // 5. TOOLTIPS GRIEGOS (CERRAR AL TOCAR FUERA)
+  // 5. TOOLTIPS GRIEGOS
   // =============================================
 
+  var backdrop = document.getElementById('tooltip-backdrop');
+  var tooltips = document.querySelectorAll('.tooltip-griego');
+  var tooltipActivo = null;
+
+  /**
+   * Detecta si estamos en viewport móvil (≤480px).
+   */
+  function esMobile() {
+    return window.innerWidth <= 480;
+  }
+
+  /**
+   * Cierra el tooltip activo en móvil.
+   */
+  function cerrarTooltipMobile() {
+    if (tooltipActivo) {
+      var contenido = tooltipActivo.querySelector('.tooltip-contenido');
+      if (contenido) contenido.classList.remove('tooltip-activo');
+      tooltipActivo.blur();
+      tooltipActivo = null;
+    }
+    if (backdrop) backdrop.classList.remove('visible');
+  }
+
+  /**
+   * Abre un tooltip en modo bottom sheet (móvil).
+   */
+  function abrirTooltipMobile(trigger) {
+    // Cerrar el anterior si existe
+    cerrarTooltipMobile();
+    var contenido = trigger.querySelector('.tooltip-contenido');
+    if (!contenido) return;
+    tooltipActivo = trigger;
+    contenido.classList.add('tooltip-activo');
+    if (backdrop) backdrop.classList.add('visible');
+  }
+
+  // Registrar eventos en todos los tooltips
+  tooltips.forEach(function (trigger) {
+    trigger.addEventListener('click', function (e) {
+      if (esMobile()) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (tooltipActivo === trigger) {
+          cerrarTooltipMobile();
+        } else {
+          abrirTooltipMobile(trigger);
+        }
+      }
+    });
+  });
+
+  // Cerrar tooltip al tocar el backdrop
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarTooltipMobile);
+  }
+
+  // En desktop: cerrar al hacer clic fuera
   document.addEventListener('click', function (e) {
-    // Si el clic fue fuera de un tooltip, quitar el foco del tooltip activo
-    if (!e.target.closest('.tooltip-griego')) {
+    if (!esMobile() && !e.target.closest('.tooltip-griego')) {
       var activo = document.querySelector('.tooltip-griego:focus');
       if (activo) activo.blur();
     }
